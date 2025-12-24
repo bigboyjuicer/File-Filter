@@ -2,24 +2,20 @@ package ru.rekklez.model;
 
 import ru.rekklez.util.DuplicateDescriptionOptionException;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class Options {
 
-    private String resultPath;
-    private String prefix;
+    private String resultPath = "";
+    private String prefix = "";
     private boolean appendable;
     private boolean shortDesc;
     private boolean fullDesc;
 
     public Options() {
     }
-
-    /*public Options(Builder builder) {
-        this.resultPath = builder.resultPath;
-        this.prefix = builder.prefix;
-        this.appendable = builder.appendable;
-        this.shortDesc = builder.shortDesc;
-        this.fullDesc = builder.fullDesc;
-    }*/
 
     public String getResultPath() {
         return resultPath;
@@ -43,6 +39,11 @@ public class Options {
 
     public void setResultPath(String resultPath) {
         this.resultPath = resultPath;
+        try {
+            Files.createDirectories(Paths.get(resultPath));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setPrefix(String prefix) {
@@ -59,48 +60,9 @@ public class Options {
     }
 
     public void setFullDesc(boolean fullDesc) throws DuplicateDescriptionOptionException {
-        if(shortDesc) throw new DuplicateDescriptionOptionException("Duplicate description option. Description is already set to 'short'");
+        if(this.shortDesc) throw new DuplicateDescriptionOptionException("Duplicate description option. Description is already set to 'short'");
         this.fullDesc = fullDesc;
     }
-
-    /*public static class Builder {
-        private String resultPath;
-        private String prefix;
-        private boolean appendable;
-        private boolean shortDesc;
-        private boolean fullDesc;
-
-        public Builder resultPath(String resultPath) {
-            this.resultPath = resultPath;
-            return this;
-        }
-
-        public Builder prefix(String prefix) {
-            this.prefix = prefix;
-            return this;
-        }
-
-        public Builder appendable(boolean appendable) {
-            this.appendable = appendable;
-            return this;
-        }
-
-        public Builder shortDesc(boolean shortDesc) throws DescriptionException {
-            if(fullDesc) throw new DescriptionException("Description is already set to 'full'");
-            this.shortDesc = shortDesc;
-            return this;
-        }
-
-        public Builder fullDesc(boolean fullDesc) throws DescriptionException {
-            if(shortDesc) throw new DescriptionException("Description is already set to 'short'");
-            this.fullDesc = fullDesc;
-            return this;
-        }
-
-        public Options build() {
-            return new Options(this);
-        }
-    }*/
 
     @Override
     public String toString() {
