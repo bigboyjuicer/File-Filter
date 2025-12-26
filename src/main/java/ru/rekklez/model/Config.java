@@ -16,9 +16,6 @@ public class Config {
     private boolean fullDesc;
     private final List<String> files = new ArrayList<>();
 
-    public Config() {
-    }
-
     public void setFile(String name) {
         files.add(name);
     }
