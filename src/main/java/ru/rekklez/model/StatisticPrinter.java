@@ -16,19 +16,19 @@ public class StatisticPrinter {
     public void printStatistic(Statistic statistic) {
         if (isShortDesc || isFullDesc) {
             if(statistic.hasInts()) {
-                System.out.println("Статистика для целочисленных значений:");
+                System.out.println("Статистика для записанных целочисленных значений:");
                 LongSummaryStatistics intStats = statistic.getIntStats();
                 printNumericStats(intStats.getCount(), intStats.getMin(), intStats.getMax(), intStats.getSum(), intStats.getAverage());
             }
 
             if(statistic.hasFloats()) {
-                System.out.println("Статистика для чисел с плавающей точкой:");
+                System.out.println("Статистика для записанных чисел с плавающей точкой:");
                 DoubleSummaryStatistics floatStats = statistic.getFloatStats();
                 printNumericStats(floatStats.getCount(), floatStats.getMin(), floatStats.getMax(), floatStats.getSum(), floatStats.getAverage());
             }
 
             if(statistic.hasStrings()) {
-                System.out.println("Статистика для строк:");
+                System.out.println("Статистика для записанных строк:");
                 IntSummaryStatistics stringStats = statistic.getStringStats();
                 printStringStats(stringStats.getCount(), stringStats.getMin(), stringStats.getMax());
             }
