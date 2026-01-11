@@ -26,8 +26,8 @@ file-filter/
                     │   ├── FileFilter.java
                     │   ├── LazyWriter.java
                     │   ├── Option.java
-                    │   ├── Statistics.java
-                    │   └── StatisticsPrinter.java
+                    │   ├── Statistic.java
+                    │   └── StatisticPrinter.java
                     └── util/
                         ├── Util.java
                         └── exception/
