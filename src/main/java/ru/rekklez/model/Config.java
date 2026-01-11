@@ -21,37 +21,39 @@ public class Config {
     }
 
     public void setOutput(String output) throws InvalidValueException, DuplicateOptionException {
-        if(!this.output.isEmpty()) throw new DuplicateOptionException("Duplicate option: -o");
+        if(!this.output.isEmpty()) throw new DuplicateOptionException("Повторение опции: -o. Данная опция будет пропущена.");
         verifyValue(output);
         this.output = output;
     }
 
     public void setPrefix(String prefix) throws InvalidValueException, DuplicateOptionException {
-        if(!this.prefix.isEmpty()) throw new DuplicateOptionException("Duplicate option: -p");
+        if(!this.prefix.isEmpty()) throw new DuplicateOptionException("Повторение опции: -p. Данная опция будет пропущена.");
         verifyValue(prefix);
         this.prefix = prefix;
     }
 
     public void setAppendable(boolean appendable) throws DuplicateOptionException {
-        if(this.appendable == appendable) throw new DuplicateOptionException("Duplicate option: -a");
+        if(this.appendable == appendable) throw new DuplicateOptionException("Повторение опции: -a. Данная опция будет пропущена.");
         this.appendable = appendable;
     }
 
     public void setShortDesc(boolean shortDesc) throws DuplicateDescriptionOptionException, DuplicateOptionException {
-        if(this.shortDesc) throw new DuplicateOptionException("Duplicate option: -s");
-        if(this.fullDesc) throw new DuplicateDescriptionOptionException("Duplicate description option. Description is already set to -f");
+        if(this.shortDesc) throw new DuplicateOptionException("Повторение опции: -s. Данная опция будет пропущена.");
+        if(this.fullDesc) throw new DuplicateDescriptionOptionException("Повторение опции статистики. Уже установлена опция -f.");
         this.shortDesc = shortDesc;
     }
 
     public void setFullDesc(boolean fullDesc) throws DuplicateDescriptionOptionException, DuplicateOptionException {
-        if(this.fullDesc) throw new DuplicateOptionException("Duplicate option: -f");
-        if(this.shortDesc) throw new DuplicateDescriptionOptionException("Duplicate description option. Description is already set to -s");
+        if(this.fullDesc) throw new DuplicateOptionException("Повторение опции: -f. Данная опция будет пропущена.");
+        if(this.shortDesc) throw new DuplicateDescriptionOptionException("Повторение опции статистики. Уже установлена опция -s.");
         this.fullDesc = fullDesc;
     }
 
     private void verifyValue(String value) throws InvalidValueException {
         Option option = Option.getByName(value);
-        if (option != null) throw new InvalidValueException("Value cannot be equal to the option name");
+        if (option != null) {
+            throw new InvalidValueException("Параметр не должен быть равен имени опции.");
+        }
     }
 
     public String getOutput() {
