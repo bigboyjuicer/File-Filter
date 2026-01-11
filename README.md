@@ -38,9 +38,9 @@ file-filter/
                             └── NoFilesException.java
 ```
 
-## Сборка проекта
+## Сборка проекта с помощью Maven 
 
-### Компиляция с помощью Maven
+### Компиляция
 ```bash
 mvn clean compile
 ```
@@ -48,6 +48,18 @@ mvn clean compile
 ### Создание исполняемого JAR-файла
 ```bash
 mvn clean package
+```
+
+## Сборка проекта при отсутствии Maven
+
+### Компиляция
+```bash
+.\mvnw clean compile
+```
+
+### Создание исполняемого JAR-файла
+```bash
+.\mvnw clean package
 ```
 
 Готовый JAR-файл будет находиться в `target/file-filter-1.0.jar`
